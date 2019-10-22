@@ -109,7 +109,7 @@ Retorno:	% Total    % Received % Xferd  Average Speed   Time    Time     Time  C
 
 Endpoits Postman:
 
-POST :		http://localhost:8080/api/todo
+POST :		http://todolistcaseapi.herokuapp.com/api/todo
 
 Obs:		O campo ID é preenchido automaticamente.
 
