@@ -1,25 +1,12 @@
 # TodoList_Api
-É uma API RESTFUL simples para gerenciar tarefas.
+É uma API RESTFUL em Cloud simples para gerenciar tarefas.
 
-Version 1.0.0
+Version 2.0.0
 
-Deploy da aplicação:
+Esta aplicação esta Amazenada no Heroku.com.
+Para a construção da API utilizei o Spring Tools Suite 4 e o Postgres.
 
-Para realizar o deploy dessa api, será necessário ter instalado uma IDE JAVA e o POSTGRES.
-Para a construção da API utilizei o Spring Tools 4.
-
-Baixe o TodoList_Api
-importe como um projeto maven
-o projeto esta configurado para executar na porta 8080.
-
-Postgres:
-
-Criar o DataBase tarefas-apirest, que é onde a api criará as tabelas automaticamente após a execução.
-Configuração:
-		Localhost : http://127.0.0.1
-		PORT : 5432
-		username=postgres
-		password=postgres
+Acesse o https://todolistcaseapi.herokuapp.com/swagger-ui.html para acessar a visão da aplicação pelo swagger.
 
 Utilizei o Postman e o Curl, a seguir os endpoints para realização de testes.
 
@@ -28,65 +15,63 @@ EndPoints Curl:
 Os testes são realizados através do git bash.
 
 
-List:		curl http://localhost:8080/api/todo/list
+List:		curl -X GET -H 'Accept: application/json' 'https://todolistcaseapi.herokuapp.com/api/todo/list'
 
 Retorno:	 % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-		100   187    0   187    0     0   1460      0 --:--:-- --:--:-- --:--:--  1460
-		[{"id":11,"title":"Delete","detail":"testando api","status":"Pending","date":"20 de outubro"}
-		,{"id":12,"title":"Insert","detail":"testando api","status":"Pending","date":"20 de outubro"}]
+		100   403    0   403    0     0    659      0 --:--:-- --:--:-- --:--:--   			
+		658[{"id":1,"title":"Insert","detail":"Testando api em Cloud","status":"Pending","date":"21 de outubro"},
+		{"id":2,"title":"Update","detail":"Testando api em Cloud","status":"Pending","date":"21 de outubro"},
+		{"id":3,"title":"Delete","detail":"Testando api em Cloud","status":"Pending","date":"21 de outubro"},
+		{"id":4,"title":"List","detail":"Testando api em Cloud","status":"Pending","date":"21 de outubro"}]
+
 
 
 ========================================================================================================================================
 
-FindById:	curl http://localhost:8080/api/todo/{id}
+FindById:	 curl -X GET -H 'Accept: application/json' 'https://todolistcaseapi.herokuapp.com/api/todo/{id}'
 
-Exemplo:	curl http://localhost:8080/api/todo/11
+Exemplo:	 curl -X GET -H 'Accept: application/json' 'https://todolistcaseapi.herokuapp.com/api/todo/1'
 
 Retorno:	% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-		100    92    0    92    0     0    344      0 --:--:-- --:--:-- --:--:--   344
-		{"id":11,"title":"Delete","detail":"testando api","status":"Pending","date":"20 de outubro"}
+		100   100    0   100    0     0    168      0 --:--:-- --:--:-- --:--:--  
+		168{"id":1,"title":"Insert","detail":"Testando api em Cloud","status":"Pending","date":"21 de outubro"}
+
 
 
 ========================================================================================================================================
 
-PUT :	http://localhost:8080/api/todo
+PUT :	curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"id": {id},"title": "{title}","detail": "{detail}","status": "{status}","date": "{date}"}' 'https://todolistcaseapi.herokuapp.com/api/todo'
 
-Exemplo:	curl -i -X PUT -H "Content-Type: application/json" -d '{"id":12,"title":"Insert","detail":"testando api","status":"Pending","date":"20 de outubro"}' http://localhost:8080/api/todo
+Exemplo:	curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"id": 4,"title": "List" ,"detail": "Testando api em Cloud","status": "Completed","date": "21 de outubro"}' 'https://todolistcaseapi.herokuapp.com/api/todo'
 
-Retorno:	 % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+Retorno:	  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-		100   184    0    92  100    92      6      6  0:00:15  0:00:14  0:00:01    21HTTP/1.1 200
-		Content-Type: application/json
-		Transfer-Encoding: chunked
-		Date: Sun, 20 Oct 2019 21:55:51 GMT
-
-		{"id":12,"title":"Insert","detail":"testando api","status":"Pending","date":"20 de outubro"}
+		100   206    0   100  100   106    154    163 --:--:-- --:--:-- --:--:--   318{"id":4,"title":"List","detail":"Testando 		api em Cloud","status":"Completed","date":"21 de outubro"}
 
 
 ========================================================================================================================================
 
-POST:		curl -i -X POST -H "Content-Type: application/json" -d '{"id": {id},"title": "{title}","detail": "{detail}","status": "{status}","date": "{date}"}' http://localhost:8080/api/todo
+POST:		curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"title": "{title}","detail": "{detail}","status": "{status}","date": "{date}"}' 'https://todolistcaseapi.herokuapp.com/api/todo'
 
-Exemplo:	curl -i -X POST -H "Content-Type: application/json" -d '{"title":"Update","detail":"testando api","status":"Completed","date":"20 de outubro"}' http://localhost:8080/api/todo
+Exemplo:	curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -d '{"title":"Update","detail":"testando api","status":"Completed","date":"20 de outubro 2019"}' 'https://todolistcaseapi.herokuapp.com/api/todo'
 
 Retorno:	% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-		100   180    0    94  100    86    472    432 --:--:-- --:--:-- --:--:--   909HTTP/1.1 200
-		Content-Type: application/json
-		Transfer-Encoding: chunked
-		Date: Sun, 20 Oct 2019 22:00:46 GMT
+		100   189    0    98  100    91    128    119 --:--:-- --:--:-- --:--:--   		
+		248{"id":5,"title":"Update","detail":"testando api","status":"Completed","date":"20 de outubro 2019"}
 
-		{"id":14,"title":"Update","detail":"testando api","status":"Completed","date":"20 de outubro"}
 
 
 ========================================================================================================================================
 
-DELETE:		curl -i -X DELETE -H "Content-Type: application/json" -d '{"id": {id},"title": "{title}","detail": "{detail}","status": "{status}","date": "{date}"}' http://localhost:8080/api/todo
+DELETE:		curl -i -X DELETE 'Content-Type: application/json' -H 'Accept: application/json' -d '{"id": {id},"title": "{title}","detail": "{detail}","status": "{status}","date": "{date}"}' 'https://todolistcaseapi.herokuapp.com/api/todo'
 
-Exemplo:	curl -i -X DELETE -H "Content-Type: application/json" -d '{"id": 11,"title": "Delete","detail": "testando api","status": "Completed","date": "20 de outubro"}' http://localhost:8080/api/todo 
-
+Exemplo:	curl -i -X DELETE 'Content-Type: application/json' -H 'Accept: application/json' -d 	
+		'{"title":"Update","detail":"testando api","status":"Completed","date":"20 de outubro"}' 	
+		'https://todolistcaseapi.herokuapp.com/api/todo'
+		
 Retorno:	 % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
 		100    99    0     0  100    99      0     23  0:00:04  0:00:04 --:--:--     0HTTP/1.1 200
@@ -95,25 +80,27 @@ Retorno:	 % Total    % Received % Xferd  Average Speed   Time    Time     Time  
 
 ====================================================================================================================================================================================================================================
 
-HealthCheck:	curl POST http://localhost:8080/actuator/health
+HealthCheck:	curl POST https://todolistcaseapi.herokuapp.com/actuator/health
 
 Retorno:	% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
- 		0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0curl: (6) Could not resolve host: POST
-		100    15    0    15    0     0    319      0 --:--:-- --:--:-- --:--:--   319{"status":"UP"}
+  		0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0curl: (6) Could not resolve host: POST
+		100    15    0    15    0     0     23      0 --:--:-- --:--:-- --:--:--     0{"status":"UP"}
+
 
 ========================================================================================================================================
 
-Metrics:	curl POST http://localhost:8080/actuator/metrics/{metric}
+Metrics:	curl POST https://todolistcaseapi.herokuapp.com/actuator/metrics/{metric}
 
-Exemplo:	curl POST http://localhost:8080/actuator/metrics/process.start.time
+Exemplo:	curl POST https://todolistcaseapi.herokuapp.com/actuator/metrics/process.start.time
 
 Retorno:	% Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
- 	 	0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0curl: (6) Could not resolve host: POST
-		100   192    0   192    0     0   8727      0 --:--:-- --:--:-- --:--:--  	
-		8727{"name":"process.start.time","description":"Start time of the process since unix 	
-		epoch.","baseUnit":"seconds","measurements":[{"statistic":"VALUE","value":1.57162216685E9}],"availableTags":[]}
+  		0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0curl: (6) Could not resolve host: POST
+		100   193    0   193    0     0    276      0 --:--:-- --:--:-- --:--:--   		
+		276{"name":"process.start.time","description":"Start time of the process since unix 		
+		epoch.","baseUnit":"seconds","measurements":[{"statistic":"VALUE","value":1.571711506265E9}],"availableTags":[]}
+
 
 ========================================================================================================================================
 ========================================================================================================================================
@@ -125,48 +112,55 @@ POST :		http://localhost:8080/api/todo
 Obs:		O campo ID é preenchido automaticamente.
 
 Exemplo:	{
-        		"title": "Insert",
-        		"detail": "testando api",
-        		"status": "Pending",
-        		"date": "20 de outubro"
+    			"title": "Insert",
+    			"detail": "Testando api em Cloud",
+    			"status": "Pending",
+   			"date": "21 de outubro"
     		}
 
 
 ========================================================================================================================================
 
-LIST:		http://localhost:8080/api/todo/list
+LIST:		https://todolistcaseapi.herokuapp.com/api/todo/list
 
 Obs:		Retorna todas as tarefas da lista.
 
 Exemplo:
 		[
-    		{
-    			"id": 9,
-        		"title": "Delete",
-        		"detail": "testando api",
-        		"status": "Pending",
-        		"date": "20 de outubro"
-    		},
-    		{
-        		"id": 10,
-        		"title": "List",
-        		"detail": "testando api",
-        		"status": "Pending",
-        		"date": "20 de outubro"
-    		}
+  			{
+    				"id": 1,
+    				"title": "Insert",
+    				"detail": "Testando api em Cloud",
+    				"status": "Pending",
+   				"date": "21 de outubro"
+ 			},
+  			{
+   				"id": 3,
+    				"title": "Delete",
+    				"detail": "Testando api em Cloud",
+    				"status": "Pending",
+   			 	"date": "21 de outubro"
+  			},
+  			{
+    				"id": 4,
+    				"title": "List",
+    				"detail": "Testando api em Cloud",
+    				"status": "Complete",
+    				"date": "21 de outubro"
+  			},
 		]
 	
 
 ========================================================================================================================================
 
-FindById:	http://localhost:8080/api/todo/{id}
+FindById:	https://todolistcaseapi.herokuapp.com/api/todo/{id}
 
 Obs:		Retorna apenas o dado do id informado.
 
-Exemplo:	http://localhost:8080/api/todo/9
+Exemplo:	https://todolistcaseapi.herokuapp.com/api/todo/2
 
 Retorno:	{
-    			"id": 9,
+    			"id": 2,
     			"title": "Delete",
     			"detail": "testando api",
     			"status": "Pending",
@@ -175,12 +169,12 @@ Retorno:	{
 	
 ========================================================================================================================================
 
-PUT:		http://localhost:8080/api/todo
+PUT:		https://todolistcaseapi.herokuapp.com/api/todo
 
 Obs:		Altera é necessario passar todos os dados, inclusive o id.
 
 Exemplo:	{
-    			"id": 9,
+    			"id": 4,
     			"title": "Delete",
     			"detail": "testando api",
     			"status": "Completed",
@@ -189,24 +183,24 @@ Exemplo:	{
 
 ========================================================================================================================================
 
-DELETE:		http://localhost:8080/api/todo
+DELETE:		https://todolistcaseapi.herokuapp.com/api/todo
 
 Obs:		Preencher todos os campos.
 
 Exemplo:	{
-        		"id": 6,
-       	 		"title": "Insert",
-        		"detail": "testando api",
-        		"status": "Complete",
-        		"data": "21 de outubro"
-    		}
+  			"id": 2,
+  			"title": "Insert",
+  			"detail": "Testando api em Cloud",
+  			"status": "Completed",
+  			"date": "21 de outubro 2019"
+		}
 
 
 ========================================================================================================================================
 
-METRICS:	http://localhost:8080/actuator/metrics/{metric}
+METRICS:	https://todolistcaseapi.herokuapp.com/actuator/metrics/{metric}
 
-Exemplo:	http://localhost:8080/actuator/metrics/process.start.time
+Exemplo:	https://todolistcaseapi.herokuapp.com/actuator/metrics/process.start.time
 
 Retorno: 	{
     			"name": "process.start.time",
@@ -223,7 +217,7 @@ Retorno: 	{
 
 ========================================================================================================================================
 
-HealthCheck:	http://localhost:8080/actuator/health
+HealthCheck:	https://todolistcaseapi.herokuapp.com/actuator/health
 
 Retorno:	{
     			"status": "UP"
