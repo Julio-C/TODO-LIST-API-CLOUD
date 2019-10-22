@@ -7,6 +7,8 @@ Esta aplicação esta Amazenada no Heroku.com.
 Para a construção da API utilizei o Spring Tools Suite 4 e o Postgres.
 
 Acesse o https://todolistcaseapi.herokuapp.com/swagger-ui.html para acessar a visão da aplicação pelo swagger.
+Clique em tarefa-controller e escolha o método que deseja utilizar(get/post/put/delete) e siga os exemplos existentes em cada um deles.
+
 
 Utilizei o Postman e o Curl, a seguir os endpoints para realização de testes.
 
