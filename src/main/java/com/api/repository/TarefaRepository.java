@@ -7,4 +7,5 @@ import com.api.model.TarefaModel;
 public interface TarefaRepository extends JpaRepository<TarefaModel, Long>{
 	
 	TarefaModel findById(long id);
+        Long deleteById(long id);
 }
