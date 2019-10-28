@@ -50,7 +50,7 @@ public class TarefaController {
         @DeleteMapping("/todo/{id}")
 	@ApiOperation(value = "Deleta uma Tarefas por id.")
 	public void deleteTodo(@PathVariable(value="id") long id){
-		tarefaRepository.delete(id);
+		tarefaRepository.deleteById(id);
 	}
 	
 	@PostMapping("/todo")
