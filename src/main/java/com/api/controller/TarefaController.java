@@ -46,6 +46,12 @@ public class TarefaController {
 	public void deleteTodo(@RequestBody TarefaModel tarefa){
 		tarefaRepository.delete(tarefa);
 	}
+
+        @DeleteMapping("/todo/{id}")
+	@ApiOperation(value = "Deleta uma Tarefas por id.")
+	public void deleteTodo(@PathVariable(value="id") long id){
+		tarefaRepository.delete(id);
+	}
 	
 	@PostMapping("/todo")
 	@ApiOperation(value = "Salva uma Tarefas.")
